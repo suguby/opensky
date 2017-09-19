@@ -23,8 +23,12 @@ class OpenSkyMeasurer:
         self._goal_latitude_sin = math.sin(latitude_rad)
         self._goal_latitude_cos = math.cos(latitude_rad)
         self._goal_longitude_rad = math.radians(longitude)
+        self.min_radius = self.MIN_RADIUS
+        self.max_radius = self.MAX_RADIUS
 
-    def run(self, ordered=False):
+    def run(self, min_radius=None, max_radius=None, ordered=False):
+        self.min_radius = self.MIN_RADIUS if min_radius is None else min_radius
+        self.max_radius = self.MAX_RADIUS if max_radius is None else max_radius
         self._states = self._get_data()
         self._near_to_target = self._proceed_data()
         if ordered:
@@ -54,7 +58,7 @@ class OpenSkyMeasurer:
             except ValueError:
                 continue
             distance = self._get_distance_to_goal(longitude=longitude, latitude=latitude)
-            if self.MIN_RADIUS <= distance <= self.MAX_RADIUS:
+            if self.min_radius <= distance <= self.max_radius:
                 callsign = 'N/A' if state[0] is None else state[0]
                 result.append(dict(
                     callsign=callsign,

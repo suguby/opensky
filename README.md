@@ -18,14 +18,15 @@ for row in get_list_of_planes_near_goal():
 
 get_list_of_planes_near_goal take three params
 
-* longitude - longitude of goal place, is sent None - Paris longitude
-* latitude  - latitude of goal place, is sent None - Paris latitude
-* ordered   - need order result by distance to goal, default False
-
+* longitude  - longitude of goal place, is sent None - Paris longitude
+* latitude   - latitude of goal place, is sent None - Paris latitude
+* min_radius - minmal radius from goal place, is sent None - 400 km
+* max_radius - maximal radius from goal place, is sent None - 500 km
+* ordered    - need order result by distance to goal, default False
 
 get_list_of_planes_near_goal return list of dictionaries with keys
 
 * callsign  - plane callsign
 * longitude - plane longitude
 * latitude  - plane latitude
-* distance  - distance to goal place
+* distance  - distance to goal place, km

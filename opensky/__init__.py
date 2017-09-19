@@ -3,9 +3,9 @@
 from opensky.core import OpenSkyMeasurer
 
 
-def get_list_of_planes_near_goal(longitude=None, latitude=None, ordered=False):
+def get_list_of_planes_near_goal(longitude=None, latitude=None, min_radius=None, max_radius=None, ordered=False):
     measurer = OpenSkyMeasurer(longitude=longitude, latitude=latitude)
-    result = measurer.run(ordered=ordered)
+    result = measurer.run(min_radius=min_radius, max_radius=max_radius, ordered=ordered)
     return result
 
 
