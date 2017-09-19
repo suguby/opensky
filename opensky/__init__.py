@@ -26,8 +26,8 @@ class OpenSkyMeasurer:
         self._goal_longitude_rad = math.radians(longitude)
 
     def run(self, ordered=False):
-        self._get_data()
-        self._proceed_data()
+        self._states = self._get_data()
+        self._near_to_target = self._proceed_data()
         if ordered:
             return sorted(self._near_to_target, key=lambda x: x['distance'])
         return self._near_to_target
@@ -41,12 +41,12 @@ class OpenSkyMeasurer:
                 exc
             ))
         try:
-            self._states = json_data['states']
+            return json_data['states']
         except KeyError:
             raise OpenSkyMeasurerException('Invalid data from opensky-network.org')
 
     def _proceed_data(self):
-        self._near_to_target = []
+        result = []
         for state in self._states:
             if state[5] is None or state[6] is None:
                 continue
@@ -57,12 +57,13 @@ class OpenSkyMeasurer:
             distance = self._get_distance_to_goal(longitude=longitude, latitude=latitude)
             if self.MIN_RADIUS <= distance <= self.MAX_RADIUS:
                 callsign = 'N/A' if state[0] is None else state[0]
-                self._near_to_target.append(dict(
+                result.append(dict(
                     callsign=callsign,
                     longitude=longitude,
                     latitude=latitude,
                     distance=distance,
                 ))
+        return result
 
     def _get_distance_to_goal(self, longitude, latitude):
         # https://en.wikipedia.org/wiki/Great-circle_distance
