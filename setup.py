@@ -22,7 +22,7 @@ setup(
     url='https://bitbucket.org/suguby/opensky',
     license='MIT',
     packages=find_packages(include=['opensky']),
-    data_files=[('.', ['requirements.txt', 'README.rst'], ), ],
+    data_files=[('.', ['requirements.txt', 'README.md'], ), ],
     install_requires=requirements,
     classifiers=[
         'Development Status :: 3 - Alpha',
