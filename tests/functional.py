@@ -20,10 +20,10 @@ class TestOpenSkyMeasurer(unittest.TestCase):
 
     def test_functional(self):
         measurer = OpenSkyMeasurer(longitude=44.0, latitude=55.0)
-        result = measurer.run(min_radius=800, max_radius=900)
-        self.assertEqual(len(result), 1)
+        result = measurer.run(ordered=True)
+        self.assertEqual(len(result), 2)
         stat = result[0]
-        self.assertEqual(stat['callsign'], '7800ee')
-        self.assertEqual(stat['longitude'], 45.2549)
+        self.assertEqual(stat['callsign'], 'UTA485')
+        self.assertEqual(stat['longitude'], 44.2549)
         self.assertEqual(stat['latitude'], 55.1871)
-        self.assertEqual(stat['distance'], 825.3702658367322)
+        self.assertEqual(stat['distance'], 26.379790386602796)
