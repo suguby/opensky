@@ -4,7 +4,9 @@ Tool for measure distance to goal from geographic coordinates.
 
 Install
 ========
-pip install opensky
+```
+pip install git+https://github.com/suguby/opensky.git
+```
 
 Usage
 ========
@@ -16,7 +18,7 @@ for row in get_list_of_planes_near_goal():
           'distance to Paris {distance}'.format(**row))
 ```
 
-get_list_of_planes_near_goal take three params
+get_list_of_planes_near_goal take fifth params:
 
 * longitude  - longitude of goal place. Default - Paris longitude
 * latitude   - latitude of goal place. Default - Paris latitude
@@ -24,7 +26,7 @@ get_list_of_planes_near_goal take three params
 * max_radius - maximal radius from goal place. Default - 500 km
 * ordered    - need order result by distance to goal. Default - False
 
-get_list_of_planes_near_goal return list of dictionaries with keys
+get_list_of_planes_near_goal return list of dictionaries with keys:
 
 * callsign  - plane callsign
 * longitude - plane longitude
