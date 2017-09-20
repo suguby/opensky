@@ -26,4 +26,4 @@ class TestOpenSkyMeasurer(unittest.TestCase):
         self.assertEqual(stat['callsign'], 'UTA485')
         self.assertEqual(stat['longitude'], 44.2549)
         self.assertEqual(stat['latitude'], 55.1871)
-        self.assertEqual(stat['distance'], 26.379790386602796)
+        self.assertEqual(round(stat['distance'], 5), 26.37979)
