@@ -11,8 +11,8 @@ class OpenSkyMeasurer:
     MIN_RADIUS = 400.0
     MAX_RADIUS = 500.0
 
-    PARIS_LONGITUDE = 48.85341
-    PARIS_LATITUDE = 2.3488
+    PARIS_LONGITUDE = 2.3488
+    PARIS_LATITUDE = 48.85341
 
     def __init__(self, longitude=None, latitude=None):
         self._states = None
