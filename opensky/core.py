@@ -8,7 +8,7 @@ from opensky.exceptions import OpenSkyMeasurerException
 
 class OpenSkyMeasurer:
     EARTH_RADIUS = 6371.0
-    MIN_RADIUS = 400.0
+    MIN_RADIUS = 0.0
     MAX_RADIUS = 500.0
 
     PARIS_LONGITUDE = 2.3488
