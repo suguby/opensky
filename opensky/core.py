@@ -11,18 +11,19 @@ class OpenSkyMeasurer:
     MIN_RADIUS = 0.0
     MAX_RADIUS = 500.0
 
+    # широта и долгота - latitude and longitude
     PARIS_LONGITUDE = 2.3488
     PARIS_LATITUDE = 48.85341
 
     def __init__(self, longitude=None, latitude=None):
-        self._states = None
-        self._near_to_target = []
         self._goal_longitude = self.PARIS_LONGITUDE if longitude is None else longitude
         self._goal_longitude_rad = math.radians(self._goal_longitude)
         self._goal_latitude = self.PARIS_LATITUDE if latitude is None else latitude
         self._goal_latitude_rad = math.radians(self._goal_latitude)
         self._goal_latitude_sin = math.sin(self._goal_latitude_rad)
         self._goal_latitude_cos = math.cos(self._goal_latitude_rad)
+        self._states = None
+        self._near_to_target = None
         self.min_radius = None
         self.max_radius = None
         self.goal_bond_degrees = None
@@ -76,7 +77,6 @@ class OpenSkyMeasurer:
         return result
 
     def _get_distance_to_goal(self, longitude, latitude):
-        # широта и долгота - latitude and longitude
         # https://en.wikipedia.org/wiki/Great-circle_distance
         longitude_rad = math.radians(longitude)
         latitude_rad = math.radians(latitude)
@@ -86,12 +86,5 @@ class OpenSkyMeasurer:
             self._goal_latitude_sin * math.sin(latitude_rad) +
             self._goal_latitude_cos * math.cos(latitude_rad) * math.cos(delta_longitude_rad)
         )
-
-        # delta_rad_2 = 2 * math.asin(math.sqrt(
-        #     math.sin((latitude_rad - self._goal_latitude_rad) / 2.0) ** 2
-        #     + math.cos(latitude_rad) * math.cos(self._goal_latitude_rad) * math.sin(
-        #         (longitude_rad - self._goal_longitude_rad) / 2.0
-        #     ) ** 2
-        # ))
         distance = delta_rad * self.EARTH_RADIUS
         return distance
